@@ -13,7 +13,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: 'Courier New';
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -116,7 +116,10 @@ samp {
   font-family: monospace, monospace;
   font-size: 1em;
 }
-button,
+button {
+    color: brown;
+    font: lighter;
+},
 input,
 optgroup,
 select,
