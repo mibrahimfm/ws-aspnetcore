@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SalesWebMVC.Models.Enums;
 
 namespace SalesWebMVC.Services
 {
@@ -18,10 +19,10 @@ namespace SalesWebMVC.Services
 
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
         {
-            //var result = from obj in _context.SalesRecord select obj;
-            var result = from obj in _context.SalesRecord
-                         where obj.Status == Models.Enums.SaleStatus.Billed
-                         select obj;
+            var result = from obj in _context.SalesRecord select obj;
+            //var result = from obj in _context.SalesRecord
+            //             where obj.Status == Models.Enums.SaleStatus.Billed
+              //           select obj;
 
 
             if (minDate.HasValue)
@@ -61,5 +62,24 @@ namespace SalesWebMVC.Services
                 .GroupBy(x => x.Seller.Department)
                 .ToListAsync();
         }
+
+        public List<SaleStatus> FindStatuses()
+        {
+            var list = new List<SaleStatus>
+            {
+                SaleStatus.Billed,
+                SaleStatus.Canceled,
+                SaleStatus.Pending
+            };
+            return list;
+        }
+
+        public async Task InsertAsync(SalesRecord obj)
+        {
+            _context.Add(obj);
+            await _context.SaveChangesAsync();
+        }
     }
+
+    
 }
